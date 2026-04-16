@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICU Drug Assistant</title>
+
+<style>
+body {
+  background: #020617;
+  color: #e2e8f0;
+  font-family: system-ui;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  color: white;
+}
+
+.card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: #00e0ff;
+}
+
+.hidden {
+  display: none;
+}
+
+.label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.value {
+  margin-bottom: 8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>ICU Drug Assistant</h1>
+
+<input type="text" id="search" placeholder="Search drug...">
+
+<div id="app"></div>
+
+<script>
+const drugs = [
+{
+name: "Norepinephrine",
+prep: "4 mg in 50 ml NS (80 mcg/ml)",
+dose: "0.05–1 mcg/kg/min",
+why: "Raises BP via vasoconstriction",
+watch: "MAP ≥65, extravasation, cold extremities"
+},
+{
+name: "Dopamine",
+prep: "200 mg in 50 ml NS",
+dose: "2–20 mcg/kg/min",
+why: "Increases HR + contractility",
+watch: "Tachycardia, arrhythmias"
+},
+{
+name: "Dobutamine",
+prep: "250 mg in 50 ml NS",
+dose: "2–20 mcg/kg/min",
+why: "Improves cardiac output",
+watch: "BP drop, arrhythmias"
+},
+{
+name: "Adrenaline",
+prep: "1 mg in 50 ml NS",
+dose: "0.01–0.5 mcg/kg/min",
+why: "Boosts HR + BP",
+watch: "Arrhythmias, lactate rise"
+},
+{
+name: "Amiodarone",
+prep: "150 mg in 100 ml NS",
+dose: "1 mg/min → 0.5 mg/min",
+why: "Stabilizes arrhythmias",
+watch: "Bradycardia, hypotension"
+},
+{
+name: "Midazolam",
+prep: "Dilute to 50 ml",
+dose: "1–5 mg/hr",
+why: "Sedation",
+watch: "Respiratory depression"
+},
+{
+name: "Furosemide",
+prep: "100 mg in 50 ml",
+dose: "5–20 mg/hr",
+why: "Removes fluid",
+watch: "K+ loss, dehydration"
+},
+{
+name: "Potassium Chloride",
+prep: "20 mEq in 100 ml NS",
+dose: "Max 10–20 mEq/hr",
+why: "Corrects hypokalemia",
+watch: "Cardiac arrest if fast"
+},
+{
+name: "Magnesium Sulfate",
+prep: "1–2 g in 100 ml NS",
+dose: "Over 20–30 min",
+why: "Stabilizes myocardium",
+watch: "Loss of reflexes"
+}
+];
+
+const app = document.getElementById("app");
+const search = document.getElementById("search");
+
+function render(list) {
+  app.innerHTML = "";
+  list.forEach(drug => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("div");
+    title.innerHTML = "<b>" + drug.name + "</b>";
+
+    const details = document.createElement("div");
+    details.className = "hidden";
+    details.innerHTML = `
+      <div class="value"><span class="label">Prep:</span> ${drug.prep}</div>
+      <div class="value"><span class="label">Dose:</span> ${drug.dose}</div>
+      <div class="value"><span class="label">Why:</span> ${drug.why}</div>
+      <div class="value"><span class="label">Watch:</span> ${drug.watch}</div>
+    `;
+
+    card.onclick = () => {
+      details.classList.toggle("hidden");
+    };
+
+    card.appendChild(title);
+    card.appendChild(details);
+    app.appendChild(card);
+  });
+}
+
+search.addEventListener("input", () => {
+  const value = search.value.toLowerCase();
+  const filtered = drugs.filter(d => d.name.toLowerCase().includes(value));
+  render(filtered);
+});
+
+render(drugs);
+</script>
+
+</body>
+</html>
