@@ -118,38 +118,270 @@ button:hover {
 </div>
 <script>
 const drugs = [
+///// INFUSIONS ///// 
+
 {
 name: "Norepinephrine",
+type: "infusion",
 what: "Vasopressor",
-when: "Septic shock, hypotension",
-prep: "4 mg in 50 ml NS (80 mcg/ml)",
+when: "Septic shock",
+prep: "4 mg in 50 ml",
+conc: 80,
 dose: 0.1,
-watch: "MAP ≥65, cold extremities"
+watch: "MAP ≥65, extravasation"
 },
+
 {
 name: "Dopamine",
+type: "infusion",
 what: "Inotrope",
-when: "Shock, low BP",
+when: "Shock",
 prep: "200 mg in 50 ml",
+conc: 4000/50,
 dose: 5,
 watch: "Tachycardia"
 },
+
 {
 name: "Dobutamine",
+type: "infusion",
 what: "Inotrope",
 when: "Heart failure",
 prep: "250 mg in 50 ml",
+conc: 5000/50,
 dose: 5,
 watch: "BP drop"
 },
+
 {
-name: "Adrenaline",
+name: "Adrenaline Infusion",
+type: "infusion",
 what: "Vasopressor",
-when: "Cardiac arrest, shock",
+when: "Shock",
 prep: "1 mg in 50 ml",
+conc: 1000/50,
 dose: 0.1,
 watch: "Arrhythmias"
+},
+
+{
+name: "Nitroglycerin",
+type: "infusion",
+what: "Vasodilator",
+when: "ACS, pulmonary edema",
+prep: "25 mg in 50 ml",
+conc: 25000/50,
+dose: 5,
+watch: "Hypotension"
+},
+
+///// ANTIARRHYTHMICS ///// 
+
+{
+name: "Amiodarone",
+type: "bolus",
+what: "Antiarrhythmic",
+when: "VT/VF",
+prep: "150 mg IV",
+dose: "150 mg",
+watch: "Bradycardia"
+},
+
+{
+name: "Lidocaine (Xylocard)",
+type: "bolus",
+what: "Antiarrhythmic",
+when: "VT/VF",
+prep: "1 gm / 50 ml",
+dose: "1–1.5 mg/kg",
+watch: "CNS toxicity"
+},
+
+{
+name: "Diltiazem",
+type: "bolus",
+what: "CCB",
+when: "AF",
+prep: "25 mg IV",
+dose: "0.25 mg/kg",
+watch: "Hypotension"
+},
+
+{
+name: "Metoprolol (Betaloc)",
+type: "bolus",
+what: "Beta blocker",
+when: "Tachycardia",
+prep: "5 mg IV",
+dose: "5 mg slow IV",
+watch: "Bradycardia"
+},
+
+///// EMERGENCY DRUGS ///// 
+
+{
+name: "Atropine",
+type: "bolus",
+what: "Anticholinergic",
+when: "Bradycardia",
+prep: "0.6 mg",
+dose: "0.6 mg IV",
+watch: "Tachycardia"
+},
+
+{
+name: "Adrenaline (Bolus)",
+type: "bolus",
+what: "Resuscitation",
+when: "Cardiac arrest",
+prep: "1 mg",
+dose: "1 mg IV",
+watch: "Arrhythmias"
+},
+
+{
+name: "Hydrocortisone",
+type: "bolus",
+what: "Steroid",
+when: "Shock, allergy",
+prep: "100 mg",
+dose: "100 mg IV",
+watch: "Hyperglycemia"
+},
+
+{
+name: "Sodium Bicarbonate",
+type: "bolus",
+what: "Alkalinizing agent",
+when: "Acidosis",
+prep: "7.5%",
+dose: "As per ABG",
+watch: "Overcorrection"
+},
+
+{
+name: "Avil",
+type: "bolus",
+what: "Antihistamine",
+when: "Allergy",
+prep: "25 mg",
+dose: "25 mg IV",
+watch: "Sedation"
+},
+
+{
+name: "Dexona",
+type: "bolus",
+what: "Steroid",
+when: "Resp allergy",
+prep: "8 mg",
+dose: "8 mg IV",
+watch: "Hyperglycemia"
+},
+
+{
+name: "Midazolam",
+type: "bolus",
+what: "Sedative",
+when: "Seizure/sedation",
+prep: "10 mg",
+dose: "1–2 mg IV",
+watch: "Resp depression"
+},
+
+{
+name: "Lasix (Furosemide)",
+type: "bolus",
+what: "Diuretic",
+when: "Pulmonary edema",
+prep: "20–40 mg",
+dose: "20–40 mg IV",
+watch: "Electrolyte loss"
+},
+
+{
+name: "Phenytoin (Epsolin)",
+type: "bolus",
+what: "Anticonvulsant",
+when: "Seizures",
+prep: "100 mg",
+dose: "100 mg IV slow",
+watch: "Arrhythmia"
+},
+
+{
+name: "Aminophylline",
+type: "bolus",
+what: "Bronchodilator",
+when: "Asthma/COPD",
+prep: "50 mg",
+dose: "50 mg IV",
+watch: "Tachycardia"
+},
+
+{
+name: "Deriphylline",
+type: "bolus",
+what: "Bronchodilator",
+when: "Bronchospasm",
+prep: "220 mg",
+dose: "220 mg IV",
+watch: "Palpitations"
+},
+
+///// ELECTROLYTES ///// 
+
+{
+name: "Magnesium Sulfate",
+type: "bolus",
+what: "Electrolyte",
+when: "Torsades, eclampsia",
+prep: "1 gm",
+dose: "1–2 gm IV",
+watch: "Reflex loss"
+},
+
+{
+name: "3% Sodium Chloride",
+type: "bolus",
+what: "Hypertonic saline",
+when: "Hyponatremia",
+prep: "250 ml",
+dose: "Controlled",
+watch: "CPM risk"
+},
+
+{
+name: "Potassium Chloride",
+type: "infusion",
+what: "Electrolyte",
+when: "Hypokalemia",
+prep: "15% (1.5 gm/10 ml)",
+conc: 1500/10,
+dose: 10,
+watch: "Arrhythmia"
+},
+
+{
+name: "Calcium Gluconate",
+type: "bolus",
+what: "Electrolyte",
+when: "Hypocalcemia",
+prep: "10 ml",
+dose: "10 ml slow IV",
+watch: "ECG changes"
+},
+
+{
+name: "25% Dextrose",
+type: "bolus",
+what: "Glucose",
+when: "Hypoglycemia",
+prep: "100 ml",
+dose: "100 ml IV",
+watch: "Rebound"
 }
+
 ];
 
 const app = document.getElementById("app");
@@ -169,7 +401,17 @@ function render(list) {
       <div class="label">What:</div> ${drug.what}
       <div class="label">When:</div> ${drug.when}
       <div class="label">Prep:</div> ${drug.prep}
-      <div class="label">Dose:</div> ${drug.dose} mcg/kg/min
+     <div class="label">Dose (mcg/kg/min)</div>
+<input type="range" 
+  min="0.01" 
+  max="${drug.dose * 5}" 
+  step="0.01" 
+  value="${drug.dose}" 
+  id="slider-${drug.name}"
+  oninput="updateDose('${drug.name}')"
+<div id="dose-${drug.name}" style="font-size:12px; margin-top:4px;">
+  ${drug.dose}
+</div>
       <div class="label">Watch:</div> ${drug.watch}
 
       <div class="calc">
@@ -196,10 +438,27 @@ function calculate(name) {
   if (!weight) return alert("Enter weight");
 
   const drug = drugs.find(d => d.name === name);
+  if (drug.type !== "infusion") {
+  document.getElementById("calc-" + name).innerHTML =
+    `<div style="color:#38bdf8;">No infusion calculation required</div>`;
+  return;
+}
+  function updateDose(name) {
+  const slider = document.getElementById("slider-" + name);
+  document.getElementById("dose-" + name).innerText = slider.value;
+}
   const result = (drug.dose * weight).toFixed(2);
 
-  document.getElementById("calc-" + name).innerHTML =
-    `Infusion: ${result} mcg/min`;
+  const mcgPerMin = result;
+const mlPerHr = ((mcgPerMin * 60) / drug.conc).toFixed(2);
+
+document.getElementById("calc-" + name).innerHTML =
+  `<div style="margin-top:8px; padding:8px; border:1px solid #00e0ff; border-radius:6px;">
+     <div><b>${mlPerHr} ml/hr</b></div>
+     <div style="font-size:12px; color:#64748b;">
+       ${mcgPerMin} mcg/min
+     </div>
+   </div>`;
 }
 
 function calcBMI() {
