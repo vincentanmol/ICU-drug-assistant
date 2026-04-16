@@ -8,7 +8,7 @@
 
 <style>
 body {
-  background: #020617;
+  background: radial-gradient(circle at top, #031122, #020617 70%);
   color: #e2e8f0;
   font-family: system-ui;
   margin: 0;
@@ -17,46 +17,79 @@ body {
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  margin-top: 30px;
+  color: #38bdf8;
 }
 
 input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
-  background: #0f172a;
+  background: #020617;
   border: 1px solid #1e293b;
-  color: white;
+  color: #e2e8f0;
+  border-radius: 6px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00e0ff;
+  box-shadow: 0 0 6px rgba(0,224,255,0.3);
 }
 
 .card {
-  background: #0f172a;
+  background: rgba(15, 23, 42, 0.7);
   border: 1px solid #1e293b;
   padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  cursor: pointer;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  transition: 0.2s;
 }
 
 .card:hover {
   border-color: #00e0ff;
+  box-shadow: 0 0 10px rgba(0,224,255,0.2);
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
-.label { color: #64748b; font-size: 12px; }
+.label {
+  font-size: 12px;
+  color: #64748b;
+}
 
 .calc {
-    margin-top: 10px;
-    padding: 10px;
-    background: #020617;
-    border-radius: 6px;
-  }
-  button {
-    background: #00e0ff;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    margin-top: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  background: #020617;
+  border-radius: 6px;
+  border: 1px solid #1e293b;
+}
+
+button {
+  background: linear-gradient(90deg, #00e0ff, #38bdf8);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.section {
+  margin-bottom: 30px;
+};
   }
   
 </style>
@@ -67,17 +100,20 @@ input {
 
 <h1>ICU Drug Assistant</h1>
 
-<input type="number" id="weight" placeholder="Enter weight (kg)">
+<div class="section">
+  <input type="number" id="weight" placeholder="Enter weight (kg)">
+  <input type="text" id="search" placeholder="Search drug...">
+</div>
 
-<input type="text" id="search" placeholder="Search drug...">
-
-<h2>BMI Calculator</h2>
-<input type="number" id="height" placeholder="Height (cm)">
-<button onclick="calcBMI()">Calculate BMI</button>
-<div id="bmiResult"></div>
-
-<div id="app"></div>
-
+<div class="section">
+  <h2>BMI Calculator</h2>
+  <input type="number" id="height" placeholder="Height (cm)">
+  <button onclick="calcBMI()">Calculate BMI</button>
+  <div id="bmiResult"></div>
+<div class="section">
+  <h2>Drugs</h2>
+  <div id="app"></div>
+</div>
 <script>
 const drugs = [
 {
