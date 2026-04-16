@@ -394,39 +394,49 @@ function render(list) {
     card.className = "card";
 
     const details = document.createElement("div");
-    details.className = "hidden";
+   details.className = "details hidden";
 
     details.innerHTML = `
-      <div><b>${drug.name}</b></div>
-      <div class="label">What:</div> ${drug.what}
-      <div class="label">When:</div> ${drug.when}
-      <div class="label">Prep:</div> ${drug.prep}
-     <div class="label">Dose (mcg/kg/min)</div>
-<input type="range" 
-  min="0.01" 
-  max="${drug.dose * 5}" 
-  step="0.01" 
-  value="${drug.dose}" 
-  id="slider-${drug.name}"
-  oninput="updateDose('${drug.name}')"
-<div id="dose-${drug.name}" style="font-size:12px; margin-top:4px;">
-  ${drug.dose}
-</div>
-      <div class="label">Watch:</div> ${drug.watch}
+      <div onclick="event.stopPropagation()">
 
-      <div class="calc">
-        <button onclick="calculate('${drug.name}')">Calculate Dose</button>
-        <div id="calc-${drug.name}"></div>
-      </div>
-    `;
+  <div><b>${drug.name}</b></div>
+
+  <div class="label">What:</div> ${drug.what}
+  <div class="label">When:</div> ${drug.when}
+  <div class="label">Prep:</div> ${drug.prep}
+
+  <div class="label">Dose (mcg/kg/min)</div>
+
+  <input type="range"
+    min="0.01"
+    max="${drug.dose * 5}"
+    step="0.01"
+    value="${drug.dose}"
+    id="slider-${drug.name}"
+    oninput="updateDose('${drug.name}')">
+
+  <div id="dose-${drug.name}" style="font-size:12px; margin-top:4px;">
+    ${drug.dose}
+  </div>
+
+  <div class="label">Watch:</div> ${drug.watch}
+
+  <div id="calc-${drug.name}"></div>
+
+</div>
+`;
 
    card.innerHTML = `
   <div style="display:flex; justify-content:space-between;">
     <b>${drug.name}</b>
-    <span style="color:#00e0ff; font-size:12px;">Tap</span>
   </div>
 `;
-    card.onclick = () => details.classList.toggle("hidden");
+   card.onclick = (e) => {
+  // if user clicks inside details (slider, button, etc) → do nothing
+  if (e.target.closest(".details")) return;
+
+  details.classList.toggle("hidden");
+};
 
     card.appendChild(details);
     app.appendChild(card);
