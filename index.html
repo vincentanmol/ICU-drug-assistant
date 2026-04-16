@@ -159,7 +159,7 @@ function render() {
 
     card.innerHTML = `
       <b>${drug.name}</b>
-     ${openCard === drug.name ? `
+    ${openCards.includes(drug.name) ? `
         <br><br>
         <input type="range"
           class="slider"
