@@ -7,12 +7,23 @@
 <title>ICU Drug Assistant</title>
 
 <style>
+:root {
+  --bg: #0b1220;           /* deep blue-black */
+  --card: #0f172a;         /* panel surface */
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #64748b;
+
+  --accent: #00e0ff;       /* cyber blue */
+  --accent-soft: rgba(0,224,255,0.15);
+
+  --danger: #ff3b3b;
+  --warn: #facc15;
+}
 body {
-  background: radial-gradient(circle at top, #031122, #020617 70%);
-  color: #e2e8f0;
-  font-family: system-ui;
-  margin: 0;
-  padding: 20px;
+  background: radial-gradient(circle at top, #0f172a, #020617 80%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 h1 {
@@ -44,16 +55,22 @@ input:focus {
 
 .card {
   background: rgba(15, 23, 42, 0.7);
-  border: 1px solid #1e293b;
-  padding: 15px;
-  margin-bottom: 12px;
+  border: 1px solid var(--border);
   border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(6px);
+
   transition: 0.2s;
+}
+  .card.active {  
+  border-color: var(--accent);  
+  box-shadow: 0 0 18px rgba(0,224,255,0.25);  
 }
 
 .card:hover {
-  border-color: #00e0ff;
-  box-shadow: 0 0 10px rgba(0,224,255,0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-soft);
 }
 
 .hidden {
@@ -414,6 +431,11 @@ function render(list) {
     value="${drug.dose}"
     id="slider-${drug.name}"
     oninput="updateDose('${drug.name}')">
+    <div style="display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
+  <span>0.01</span>
+  <span>${drug.dose}</span>
+  <span>${(drug.dose * 5).toFixed(2)}</span>
+</div>
 
   <div id="dose-${drug.name}" style="font-size:12px; margin-top:4px;">
     ${drug.dose}
@@ -436,6 +458,7 @@ function render(list) {
   if (e.target.closest(".details")) return;
 
   details.classList.toggle("hidden");
+     card.classList.toggle("active");
 };
 
     card.appendChild(details);
