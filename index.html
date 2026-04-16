@@ -170,6 +170,18 @@ function render() {
     let mlhr = "";
     if(weight) {
   mlhr = ((dose * weight * 60)/drug.conc).toFixed(2);
+
+  if(openCards.includes(drug.name)) {
+    totalFlow += parseFloat(mlhr);
+
+    if(drug.name === "Norepinephrine") {
+      totalNE += parseFloat(dose);
+    }
+
+    if(drug.name === "Dopamine") {
+      totalNE += parseFloat(dose) / 100;
+    }
+  }
 }
     card.innerHTML = `
       <b>${drug.name}</b>
@@ -244,7 +256,8 @@ function update(i,name,conc) {
   }
 }
 document.getElementById("totalPanel").innerText =
-  "Total Flow: " + totalFlow.toFixed(2) + " ml/hr";
+  "Total Flow: " + totalFlow.toFixed(2) + " ml/hr" +
+  " | NE Eq: " + totalNE.toFixed(2) + " mcg/kg/min";
 render();
   
 
