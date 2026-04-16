@@ -255,9 +255,27 @@ function update(i,name,conc) {
     document.getElementById("result-"+i).innerText = mlhr + " ml/hr";
   }
 }
-document.getElementById("totalPanel").innerText =
+let status = "LOW";
+let color = "#00e0ff"; // default blue
+
+if(totalNE > 0.1) {
+  status = "MODERATE";
+  color = "#facc15";
+}
+
+if(totalNE > 0.3) {
+  status = "HIGH";
+  color = "#ff3b3b";
+}
+
+const panel = document.getElementById("totalPanel");
+
+panel.innerText =
   "Total Flow: " + totalFlow.toFixed(2) + " ml/hr" +
-  " | NE Eq: " + totalNE.toFixed(2) + " mcg/kg/min";
+  " | NE Eq: " + totalNE.toFixed(2) +
+  " (" + status + ")";
+
+panel.style.color = color;
 render();
   
 
