@@ -155,6 +155,8 @@ let totalNE = 0;
 function render() {
   const app = document.getElementById("app");
   app.innerHTML = "";
+  totalFlow = 0;
+  totalNE = 0;
 
   drugs.forEach((drug,i) => {
     const card = document.createElement("div");
