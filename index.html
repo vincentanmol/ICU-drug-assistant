@@ -137,12 +137,28 @@ function render() {
 }
 
 function update(i,name,conc) {
+
   const slider = document.querySelectorAll(".slider")[i];
   const val = slider.value;
+
+  const drug = drugs[i]; // 👈 ADD THIS
 
   sliderState[name] = val;
 
   document.getElementById("dose-"+i).innerText = val;
+
+  // 🔥 COLOR LOGIC
+  let color = "#00e0ff";
+
+  if (val > drug.doseMax * 0.7) {
+    color = "#facc15";
+  }
+
+  if (val > drug.doseMax * 0.9) {
+    color = "#ff3b3b";
+  }
+
+  document.getElementById("dose-"+i).style.color = color;
 
   const weight = document.getElementById("weight").value;
 
