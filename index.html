@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    input {
+  background:#020617;
+  border:1px solid #1e293b;
+  color:#e2e8f0;
+  padding:8px;
+  border-radius:6px;
+}
+    
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICU Drug Console</title>
@@ -16,15 +25,17 @@ body {
 
 .card {
   border:1px solid #1e293b;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:8px;
-  cursor:pointer;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:10px;
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(6px);
+  transition:0.2s;
 }
 
 .card.open {
   border-color:#00e0ff;
-  box-shadow:0 0 12px rgba(0,224,255,0.2);
+  box-shadow:0 0 18px rgba(0,224,255,0.25);
 }
 
 .slider {
@@ -33,15 +44,18 @@ body {
 
 .result {
   margin-top:10px;
-  font-size:18px;
+  font-size:20px;
   color:#00e0ff;
+  text-shadow:0 0 8px rgba(0,224,255,0.6);
 }
 </style>
 </head>
 
 <body>
 
-<h2>ICU Drug Console</h2>
+<h2 style="color:#00e0ff; letter-spacing:1px;">
+  ICU DRUG CONSOLE v0.6
+</h2>
 
 <input type="number" id="weight" placeholder="Enter weight (kg)" />
 
@@ -98,6 +112,11 @@ function render() {
           step="0.01"
           value="${dose}"
           oninput="update(${i},'${drug.name}',${drug.conc})">
+          <div style="display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
+  <span>${drug.doseMin}</span>
+  <span>${dose}</span>
+  <span>${drug.doseMax}</span>
+</div>
 
         <div>Dose: <span id="dose-${i}">${dose}</span></div>
 
