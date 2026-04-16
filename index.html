@@ -443,10 +443,7 @@ function calculate(name) {
     `<div style="color:#38bdf8;">No infusion calculation required</div>`;
   return;
 }
-  function updateDose(name) {
-  const slider = document.getElementById("slider-" + name);
-  document.getElementById("dose-" + name).innerText = slider.value;
-}
+  
   const result = (drug.dose * weight).toFixed(2);
 
   const mcgPerMin = result;
@@ -459,6 +456,10 @@ document.getElementById("calc-" + name).innerHTML =
        ${mcgPerMin} mcg/min
      </div>
    </div>`;
+}
+  function updateDose(name) {
+  const slider = document.getElementById("slider-" + name);
+  document.getElementById("dose-" + name).innerText = slider.value;
 }
 
 function calcBMI() {
