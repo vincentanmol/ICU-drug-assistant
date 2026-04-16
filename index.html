@@ -76,10 +76,15 @@ body {
 }
 
 .result {
-  margin-top:10px;
-  font-size:22px;
+  margin-top:12px;
+  font-size:26px;
   color:#00e0ff;
-  text-shadow:0 0 10px rgba(0,224,255,0.7);
+  font-weight:bold;
+  letter-spacing:1px;
+
+  text-shadow: 0 0 10px rgba(0,224,255,0.8);
+
+  animation: monitorFlicker 1.5s infinite;
 }
     @keyframes pulseGlow {
   0% {
@@ -91,6 +96,13 @@ body {
   100% {
     box-shadow: 0 0 6px rgba(0,224,255,0.4);
   }
+      @keyframes monitorFlicker {
+  0% { opacity: 1; }
+  48% { opacity: 1; }
+  50% { opacity: 0.85; }
+  52% { opacity: 1; }
+  100% { opacity: 1; }
+
 }
 </style>
 </head>
@@ -124,7 +136,7 @@ const drugs = [
   }
 ];
 
-let openCard = null;
+let openCards = [];
 let sliderState = {};
 
 function render() {
@@ -135,7 +147,7 @@ function render() {
     const card = document.createElement("div");
     card.className = "card";
 
-    if(openCard === drug.name) card.classList.add("open");
+   if(openCards.includes(drug.name)) card.classList.add("open");
 
     const dose = sliderState[drug.name] ?? drug.doseDefault;
     const weight = document.getElementById("weight").value;
@@ -147,7 +159,7 @@ function render() {
 
     card.innerHTML = `
       <b>${drug.name}</b>
-      ${openCard === drug.name ? `
+     ${openCard === drug.name ? `
         <br><br>
         <input type="range"
           class="slider"
@@ -171,10 +183,16 @@ function render() {
     `;
 
     card.onclick = (e) => {
-      if(e.target.tagName === "INPUT") return;
-      openCard = openCard === drug.name ? null : drug.name;
-      render();
-    };
+  if(e.target.tagName === "INPUT") return;
+
+  if(openCards.includes(drug.name)) {
+    openCards = openCards.filter(d => d !== drug.name);
+  } else {
+    openCards.push(drug.name);
+  }
+
+  render();
+};
 
     app.appendChild(card);
   });
