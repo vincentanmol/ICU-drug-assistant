@@ -17,43 +17,48 @@
 
 <style>
 body {
-  background:#060d1a;
-  color:#e2e8f0;
+  background: radial-gradient(circle at top, #0f172a, #020617 80%);
+  color: #e2e8f0;
   font-family: monospace;
-  padding:20px;
+  padding: 20px;
 }
-
+    
 .card {
   border:1px solid #1e293b;
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:10px;
-  background: rgba(15,23,42,0.6);
-  backdrop-filter: blur(6px);
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:12px;
+  background: rgba(15,23,42,0.75);
+  backdrop-filter: blur(8px);
   transition:0.2s;
 }
 
 .card.open {
   border-color:#00e0ff;
-  box-shadow:0 0 18px rgba(0,224,255,0.25);
+  box-shadow:0 0 20px rgba(0,224,255,0.25);
 }
 
 .slider {
   width:100%;
 }
+    input[type=range] {
+  width: 100%;
+  accent-color: #00e0ff;
+  cursor: pointer;
+}
 
 .result {
   margin-top:10px;
-  font-size:20px;
+  font-size:22px;
   color:#00e0ff;
-  text-shadow:0 0 8px rgba(0,224,255,0.6);
+  text-shadow:0 0 10px rgba(0,224,255,0.7);
 }
 </style>
 </head>
 
 <body>
 
-<h2 style="color:#00e0ff; letter-spacing:1px;">
+<h2 style="color:#00e0ff; letter-spacing:2px;">
   ICU DRUG CONSOLE v0.6
 </h2>
 
