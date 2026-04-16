@@ -98,7 +98,7 @@ button:hover {
 
 <body>
 
-<h1>ICU Drug Assistant</h1>
+<h1>ICU Drug Console</h1>
 
 <div class="section">
   <input type="number" id="weight" placeholder="Enter weight (kg)">
@@ -110,6 +110,8 @@ button:hover {
   <input type="number" id="height" placeholder="Height (cm)">
   <button onclick="calcBMI()">Calculate BMI</button>
   <div id="bmiResult"></div>
+</div>
+
 <div class="section">
   <h2>Drugs</h2>
   <div id="app"></div>
@@ -176,7 +178,12 @@ function render(list) {
       </div>
     `;
 
-    card.innerHTML = `<b>${drug.name}</b>`;
+   card.innerHTML = `
+  <div style="display:flex; justify-content:space-between;">
+    <b>${drug.name}</b>
+    <span style="color:#00e0ff; font-size:12px;">Tap</span>
+  </div>
+`;
     card.onclick = () => details.classList.toggle("hidden");
 
     card.appendChild(details);
